@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Técnica Qualitativa - Profª Joyce Neres</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #1a7f8e;
+            --teal-dark: #0d5c6b;
+            --teal-light: #e8f4f6;
+            --cream: #f8f8f6;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --font-head: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        p { text-align: justify; line-height: 1.75; margin-bottom: 1rem; }
+        .p-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .p-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        body {
+            background-color: #f8f8f6;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #app {
+            width: 100%;
+            max-width: 480px;
+            background-color: #f8f8f6;
+            position: relative;
+            overflow-x: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-head);
+            line-height: 1.3;
+        }
+
+        section {
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        .text-center { text-align: center; }
+        
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.4s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Waves */
+        .wave-bottom, .wave-top {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            line-height: 0;
+            z-index: 1;
+        }
+        .wave-bottom { bottom: -1px; }
+        .wave-top { top: -1px; transform: rotate(180deg); }
+        .wave-bottom svg, .wave-top svg { width: 100%; height: auto; }
+
+        /* SEÇÃO 1: HERO */
+        .hero {
+            background-color: #0a0a0a;
+            color: var(--white);
+            padding-top: 4rem;
+            padding-bottom: 6rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        .hero h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--teal-light);
+            margin-bottom: 2rem;
+        }
+        .hero p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* INTRODUÇÃO COM IMAGEM — LADO A LADO */
+        .intro-bloco {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2.5rem 1.5rem;
+            background-color: #f8f8f6;
+        }
+        .intro-foto-container {
+            width: 140px;
+            min-width: 140px;
+            height: 170px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--teal-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .intro-foto-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .intro-placeholder {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: var(--teal-dark);
+            font-weight: bold;
+        }
+        .intro-texto {
+            font-size: 15px;
+            color: var(--text-dark);
+            font-weight: 400;
+            text-align: left;
+            line-height: 1.7;
+        }
+        @media (max-width: 400px) {
+            .intro-bloco { flex-direction: column; }
+            .intro-foto-container { width: 100%; min-width: unset; height: 200px; }
+        }
+
+        /* SEÇÃO 2: COMO FUNCIONA */
+        .como-funciona { background-color: var(--cream); padding-bottom: 4rem; }
+        .step-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .step-num {
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            font-family: var(--font-head);
+            font-weight: 700;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .step-text { font-size: 0.95rem; font-weight: 500; }
+
+        /* SEÇÃO 3: BASE TEÓRICA */
+        .base-teorica { background-color: #f8f8f6; }
+        .base-teorica h2 { font-size: 1.5rem; color: var(--teal-dark); margin-bottom: 0.2rem; }
+        .base-teorica .subtitle { color: var(--teal); font-weight: 600; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .base-teorica p { font-size: 0.95rem; margin-bottom: 2rem; }
+        
+        .accordion-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+            background: var(--white);
+        }
+        .accordion-header {
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--teal-dark);
+            background: var(--white);
+            transition: background 0.3s, color 0.3s;
+        }
+        .accordion-header:hover { background: var(--teal-light); }
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: var(--white);
+        }
+        .accordion-content p {
+            padding: 1rem;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .accordion-item.active .accordion-header {
+            background-color: var(--teal);
+            color: var(--white);
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        /* SEÇÃO 4: APLICAÇÃO NA NATAÇÃO */
+        .aplicacao { background-color: var(--teal-light); }
+        .aplicacao h2 { color: var(--teal-dark); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .aplicacao p { margin-bottom: 1rem; font-size: 0.95rem; }
+
+        /* SEÇÃO 5: FICHA DE AVALIAÇÃO */
+        .ficha { background-color: #f8f8f6; }
+        .ficha h2 { color: var(--teal-dark); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .ficha p { font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .legenda-card {
+            background: var(--teal-dark);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 16px rgba(13, 92, 107, 0.15);
+        }
+        .legenda-item {
+            display: flex;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .legenda-item:last-child { margin-bottom: 0; }
+        .legenda-sigla {
+            font-family: var(--font-head);
+            width: 50px;
+            color: var(--teal-light);
+        }
+
+        /* SEÇÃO 6: CLASSIFICAÇÕES */
+        .classificacoes { background-color: var(--cream); }
+        .classificacoes h2 { color: var(--teal-dark); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .class-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .class-card h3 { font-size: 1.1rem; color: var(--teal-dark); margin-bottom: 0.5rem; }
+        .class-card p { font-size: 0.9rem; margin: 0; }
+
+        /* SEÇÃO 7: O QUE ESPERAR */
+        .esperar { background-color: var(--teal-dark); color: var(--white); padding-bottom: 4rem;}
+        .esperar h2 { color: var(--white); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .esperar ul { list-style: none; }
+        .esperar li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .esperar li span { margin-right: 0.8rem; font-size: 1.2rem; }
+
+        /* SEÇÃO: CONHEÇA A PROFISSIONAL — ESTILO DOUGLAS */
+        .profissional-dxd {
+            background-color: #0a0a0a;
+            padding: 3rem 1.5rem;
+        }
+        .prof-card {
+            background-color: #111111;
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: row;
+            gap: 1.5rem;
+            align-items: flex-start;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .prof-foto-bloco {
+            width: 140px;
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+        .prof-rect-placeholder {
+            width: 160px;
+            height: 240px;
+            background-color: var(--teal);
+            color: var(--white);
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .prof-rect-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .prof-info-bloco {
+            flex: 1;
+            text-align: left;
+            color: var(--white);
+        }
+        .prof-tag {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--teal-light);
+            margin-bottom: 0.4rem;
+            font-family: var(--font-head);
+            font-weight: 600;
+        }
+        .prof-nome {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-family: var(--font-head);
+            line-height: 1.2;
+        }
+        .prof-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 1rem;
+            line-height: 1.65;
+            text-align: left !important;
+        }
+        .prof-desc p {
+            margin-bottom: 0.8rem;
+            text-align: left !important;
+        }
+        .prof-registro {
+            font-size: 0.8rem;
+            color: var(--teal-light);
+            font-weight: 600;
+        }
+
+        /* RODAPÉ */
+        footer {
+            background-color: #0a0a0a;
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 1.5rem 1.5rem;
+            position: relative;
+        }
+        footer p { font-size: 0.65rem; opacity: 1; margin-bottom: 0.15rem; text-align: center; }
+
+        /* BACK TO TOP */
+        #btnTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--teal);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #btnTop:hover {
+            background-color: #0a0a0a;
+        }
+        #btnTop.show { opacity: 1; visibility: visible; }
+        
+        @media (max-width: 480px) {
+            .prof-card {
+                flex-direction: column;
+                align-items: center;
+            }
+            .prof-foto-bloco {
+                width: 100%;
+                min-width: unset;
+            }
+            .prof-rect-placeholder {
+                width: 100%;
+                height: 200px;
+            }
+        }
+        @media (min-width: 481px) {
+            #btnTop {
+                right: calc(50% - 220px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <section style="background:#f8f8f6;padding:2.5rem 1.5rem 2rem;text-align:center;">
+        <h1 style="font-size:1.4rem;font-weight:800;color:#0d5c6b;text-transform:uppercase;letter-spacing:2px;margin-bottom:1rem;font-family:var(--font-head);">AVALIAÇÃO TÉCNICA QUALITATIVA</h1>
+        <img src="https://i.imgur.com/mVIInGY.png" style="width:100%;max-width:380px;object-fit:cover;display:block;margin:0 auto 1.5rem;border-radius:12px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;border:1.5px solid #0d5c6b;border-radius:50px;padding:10px 28px;">
+            <span style="font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;color:#0d5c6b;font-weight:700;font-family:var(--font-head);">ACOMPANHAMENTO</span>
+            <span style="font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;font-family:var(--font-head);-webkit-text-stroke:1.5px #1a7f8e;color:transparent;">INDIVIDUAL</span>
+        </div>
+    </section>
+
+    <div style="display:flex;flex-direction:row;align-items:flex-start;gap:1.2rem;padding:2rem 1.5rem;background:#f8f8f6;">
+        <img src="https://i.imgur.com/ICxL9L7.png" alt="Joyce Neres" style="width:140px;min-width:140px;height:190px;object-fit:cover;border-radius:10px;flex-shrink:0;">
+        <div class="p-reveal" style="flex:1;font-size:14px;color:#1a1a1a;line-height:1.75;text-align:left;">
+            Olá! Fico feliz em receber você por aqui. Através dessa página você vai entender como funciona o modelo de avaliação que utilizo nas aulas, o que a ficha representa e como interpretar o desenvolvimento do seu filho<sup>a</sup>. Peço que leia com atenção. A participação e o incentivo dos pais faz diferença no processo da criança. Vamos juntos!!
+        </div>
+    </div>
+
+    <section class="esperar reveal">
+        <h2>O QUE VOCÊ VAI RECEBER</h2>
+        <div style="display:flex;align-items:flex-start;gap:1rem;padding:0 0.5rem;">
+            <img src="https://i.imgur.com/zRpjaq4.png" alt="" style="width:110px;min-width:110px;height:150px;object-fit:cover;border-radius:10px;flex-shrink:0;">
+            <div style="flex:1;">
+                <ul>
+            <li><span>✅</span> Ficha individual com todas as habilidades avaliadas</li>
+            <li><span>✅</span> Legenda explicada na própria ficha</li>
+            <li><span>✅</span> Classificação do desenvolvimento motor</li>
+            <li><span>✅</span> Classificação do estágio de aprendizagem</li>
+            <li><span>✅</span> Considerações gerais e pontos de destaque</li>
+            <li><span>✅</span> Meta para a próxima avaliação</li>
+        </ul>
+            </div>
+        </div>
+        </section>
+
+    <section class="como-funciona reveal">
+        <h2 style="text-align:center;font-size:1.4rem;text-transform:uppercase;letter-spacing:1px;color:#0d5c6b;margin-bottom:1.5rem;padding:0 1.5rem;">Guia dos pais — aqui você entenderá</h2>
+        <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-text">A base teórica da avaliação</div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-text">A ficha de avaliação, veja como ela é estruturada</div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-text">Considerações individuais, o retorno sobre seu filho<sup>a</sup></div>
+        </div>
+    </section>
+
+    <section class="base-teorica reveal">
+        <h2>A Base do Acompanhamento</h2>
+        <div class="subtitle">Por que uso a Psicomotricidade?</div>
+        <p class="p-reveal">Para crianças pequenas, não considero viável aplicar uma avaliação técnica dos nados fora de um contexto competitivo.</p>
+        <p class="p-reveal">Por isso, realizo adaptações de acordo com a faixa etária e nível de desempenho, utilizando a Psicomotricidade como base de avaliação.</p>
+        <h3 style="color:#1a7f8e;font-size:1rem;text-transform:uppercase;letter-spacing:0.5px;margin-top:1.5rem;margin-bottom:0.8rem;font-family:var(--font-head);">Mas, o que isso significa na prática?</h3>
+        <p class="p-reveal">A Psicomotricidade é a ciência que estuda a relação entre os processos cognitivos, emocionais e motores, e é amplamente aplicada no desenvolvimento infantil em qualquer âmbito educacional. Em vez de exigir o movimento perfeito, meu foco está no desafio que aquela tarefa representa para o aluno.</p>
+        <p class="p-reveal">Dessa forma, o foco durante a ficha qualitativa é totalmente direcionado à complexidade de execução da tarefa exigida, independente da idade ou nível de classificação do aluno. Ou seja: com qual complexidade a criança realiza determinada habilidade? Alta ou baixa? A realização é condizente com a idade?</p>
+        <p class="p-reveal">Por exemplo, ao pedir que a criança coloque o rosto na água, observo se realiza com muito esforço, com pouco esforço, com apoio ou sem apoio.</p>
+        <p class="p-reveal">Essa abordagem me permite adaptar as aulas ao ritmo de cada um, garantindo a verdadeira inclusão nas turmas. Conforme a criança ganha confiança e treina, a habilidade se torna mais fácil, e eu acompanho cada passo dessa evolução, <strong style="color:#1a7f8e;">sempre em parceria com você!</strong></p>
+        
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:1.5px;color:#0d5c6b;font-weight:700;margin-top:2rem;margin-bottom:1rem;text-align:left;">Entenda os elementos da Psicomotricidade</p>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>🔹 Esquema Corporal</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>A capacidade da criança ter consciência e controle do próprio corpo, equilíbrio e posicionamento no espaço.</p>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>🔹 Lateralidade</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Noção de direita, esquerda, cima, baixo, fundamental para coordenar braços e pernas de forma independente na água.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>🔹 Coordenação Motora Global</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Capacidade de controlar os grandes grupos musculares. Na natação, permite que a criança se desloque com controle.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>🔹 Coordenação Motora Fina</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Movimentos delicados e precisos, com o rosto, nariz, boca. Essencial para a respiração aquática.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>🔹 Orientação Espaço-Temporal</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Percepção de espaço e ritmo. Na natação, a criança precisa nadar no tempo certo, controlar o ritmo das braçadas e pernadas.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>🔹 Tonicidade Muscular</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Controle do tônus muscular para se deslocar na água e manter o equilíbrio no meio líquido.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="aplicacao reveal">
+        <h2>Como isso aparece na água?</h2>
+        <p class="p-reveal">Ao entrar na água, a criança sai da posição vertical, aquela em que vivemos no dia a dia, e precisa se deslocar na horizontal. Isso desafia todo o sistema de equilíbrio e coordenação dela.</p>
+        <p class="p-reveal">Crianças que nunca tiveram contato com a piscina tendem a perder o equilíbrio, cair para os lados, para frente, para trás. Considero isso completamente normal, o sistema motor está em desenvolvimento.</p>
+        <p class="p-reveal">Conforme pratica, ela vai ampliando o repertório motor, aprende a controlar o ritmo das braçadas, a posição do rosto, o equilíbrio dentro da água. E esse desenvolvimento não fica só na natação, reflete em comunicação, autoconfiança e autopercepção.</p>
+    </section>
+
+    <section class="ficha reveal">
+        <h2>Como é a ficha que você vai receber?</h2>
+        <p class="p-reveal">Divido a avaliação em blocos. Cada bloco representa uma área da psicomotricidade com suas habilidades específicas. Ao lado de cada habilidade, você encontrará uma sigla que indica o nível de execução da criança naquele momento.</p>
+        
+        
+
+        <p class="p-reveal" style="margin-top:1.5rem;">Veja abaixo um trecho real de como a ficha chega para você:</p>
+        <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:#0d5c6b;font-weight:700;margin-top:1.2rem;margin-bottom:0.5rem;">Exemplo real da ficha</p>
+        <div style="border:1px solid #1a7f8e;border-radius:8px;padding:1rem;background:#fff;font-family:monospace;font-size:11px;line-height:2;">
+            <div style="font-weight:700;color:#0d5c6b;margin-bottom:0.5rem;font-size:10px;text-transform:uppercase;letter-spacing:1px;">HABILIDADES MOTORAS LOCOMOTORAS</div>
+            <div>Saltos <span style="float:right;color:#2e7d32;font-weight:700;">RSNE</span></div>
+            <div>Apneia <span style="float:right;color:#1a7f8e;font-weight:700;">RPE</span></div>
+            <div>Flutuação ventral <span style="float:right;color:#c62828;font-weight:700;">REE</span></div>
+            <div>Deslocamento <span style="float:right;color:#e65c00;font-weight:700;">RME</span></div>
+            <div>Sustentação <span style="float:right;color:#c62828;font-weight:700;">REE</span></div>
+            <div>Mergulhos <span style="float:right;color:#2e7d32;font-weight:700;">RSNE</span></div>
+        </div>
+    </section>
+
+    <section class="classificacoes reveal">
+        <h2>As duas classificações da ficha</h2>
+        
+        <div class="class-card">
+            <h3>Desenvolvimento Motor <br><small style="font-size:0.8rem; font-weight:normal;">(Gallahue & Ozmun)</small></h3>
+            <p class="p-reveal" style="margin-bottom:1.8rem;">Avalio em qual fase do desenvolvimento motor a criança se encontra, algo que ocorre naturalmente ao longo da vida. São 4 fases: reflexa, rudimentar, fundamental e especializada.</p><p class="p-reveal"><strong style="color:#1a7f8e;">IMPORTANTE:</strong> a classificação não deve ser vista como um limitador das habilidades da criança, e sim como um norte de análise do progresso. Os componentes inseridos na classificação servem apenas como um facilitador didático para compreender, com maior exatidão, a fase em que ela se encontra.</p>
+        </div>
+
+        <div class="class-card">
+            <h3>Aprendizagem Motora <br><small style="font-size:0.8rem; font-weight:normal;">(Morgana, 2020)</small></h3>
+            <p class="p-reveal">Avalio o que a criança está aprendendo através da prática. São 3 estágios: <strong style="color:#1a7f8e;">Cognitivo</strong> (realiza com confusão e esforço), <strong style="color:#1a7f8e;">Associativo</strong> (começa a entender e corrigir) e <strong style="color:#1a7f8e;">Autônomo</strong> (executa com fluidez e sem pensar).</p>
+        </div>
+    </section>
+
+    <section class="observacoes reveal" style="background:#fff;padding:3rem 1.5rem;">
+        <h2 style="color:#0d5c6b;font-size:1.5rem;margin-bottom:1.5rem;">Observações Individuais e Fechamento</h2>
+        <p class="p-reveal" style="font-size:0.95rem;margin-bottom:1rem;">Após os blocos de habilidades e as classificações, a ficha apresenta as observações individuais do aluno<sup>a</sup>. Essa parte é dividida em três itens:</p>
+        <p class="p-reveal" style="font-size:0.95rem;margin-bottom:0.8rem;"><strong style="color:#1a7f8e;">Desenvolturas:</strong> os pontos positivos observados durante as aulas, o que a criança já realiza com facilidade e naturalidade.</p>
+        <p class="p-reveal" style="font-size:0.95rem;margin-bottom:0.8rem;"><strong style="color:#1a7f8e;">Dificuldades observadas:</strong> os aspectos que ainda exigem mais atenção e prática no momento da avaliação.</p>
+        <p class="p-reveal" style="font-size:0.95rem;margin-bottom:0.8rem;"><strong style="color:#1a7f8e;">Considerações gerais:</strong> meu texto livre com uma análise completa do período, contextualizando a evolução, o comportamento e o que foi trabalhado.</p>
+        <p class="p-reveal" style="font-size:0.95rem;margin-top:1rem;">Ao final, registro também a <strong style="color:#1a7f8e;">meta reavaliativa</strong>, que é o objetivo definido para a próxima avaliação, de acordo com a capacidade atual do aluno<sup>a</sup>.</p>
+    </section>
+
+    <section style="background:#fff;padding:2rem 1.5rem;border-top:1px solid #e0e0e0;">
+        <button onclick="toggleRefs()" id="btn-refs" style="
+            display:block;
+            width:100%;
+            background:transparent;
+            border:2px solid #1a7f8e;
+            color:#1a7f8e;
+            font-size:0.95rem;
+            font-weight:600;
+            padding:0.85rem 1.5rem;
+            border-radius:8px;
+            cursor:pointer;
+            text-align:left;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            font-family:inherit;
+            letter-spacing:0.3px;
+        ">
+            <span>Referências utilizadas</span>
+            <span id="refs-icon" style="font-size:1.2rem;transition:transform 0.3s;">+</span>
+        </button>
+        <div id="refs-content" style="display:none;margin-top:1.2rem;">
+            <p style="font-size:0.82rem;color:#1a7f8e;margin-bottom:0.9rem;text-align:justify;line-height:1.65;">GALLAHUE, D. L.; OZMUN, J. C.; GOODWAY, J. D. <strong style="color:#1a7f8e;">Compreendendo o desenvolvimento motor:</strong> bebês, crianças, adolescentes e adultos. 7 ed. Porto Alegre: AMGH, 2013.</p>
+            <p style="font-size:0.82rem;color:#1a7f8e;margin-bottom:0.9rem;text-align:justify;line-height:1.65;">OLAISEN, R. H.; FLOCKE, S.; LOVE, T. <strong style="color:#1a7f8e;">Learning to swim: role of gender, age and practice in Latino children, ages 3-14.</strong> Injury Prevention, 24(2), 129-134, 2018.</p>
+            <p style="font-size:0.82rem;color:#1a7f8e;margin-bottom:0.9rem;text-align:justify;line-height:1.65;">MORENO-MURCIA, J. A. et al. <strong style="color:#1a7f8e;">Desarrollo y validación preliminar de escalas para la evaluación de la competencia motriz acuática en escolares de 4 a 11 años.</strong> International Journal of Sports Science, 1(1), 14-27, 2005.</p>
+            <p style="font-size:0.82rem;color:#1a7f8e;margin-bottom:0.9rem;text-align:justify;line-height:1.65;">MORENO-MURCIA, J. A. et al. <strong style="color:#1a7f8e;">Efecto de los cuentos en la competencia acuática real y percibida en infantes.</strong> Revista Internacional de Medicina y Ciencias de la Actividad Física y del Deporte, 16(61), 127-138, 2016.</p>
+            <p style="font-size:0.82rem;color:#1a7f8e;margin-bottom:0.9rem;text-align:justify;line-height:1.65;">SCHEUER, C. et al. <strong style="color:#1a7f8e;">Development and validation of a survey instrument for detecting basic motor competencies in elementary school children.</strong> Cogent Education, 4(1), 1-17, 2017.</p>
+            <p style="font-size:0.82rem;color:#1a7f8e;text-align:justify;line-height:1.65;">WIZER, Rossane Trindade et al. <strong style="color:#1a7f8e;">Instrumentos de avaliação de crianças no meio aquático: uma revisão sistemática.</strong> Motricidade, v. 17, n. 3, p. 306-325, 2021.</p>
+        </div>
+    </section>
+
+
+
+    <section class="profissional-dxd reveal">
+        <div class="prof-card">
+            <div class="prof-foto-bloco">
+                <div class="prof-rect-placeholder">
+<img src="https://i.imgur.com/tcF4VG5.png" alt="Joyce Neres" style="width:100%;height:100%;object-fit:contain;object-position:top;border-radius:8px;">
+                </div>
+            </div>
+            <div class="prof-info-bloco">
+                <div class="prof-tag">CONHEÇA A PROFISSIONAL RESPONSÁVEL</div>
+                <div class="prof-nome" style="font-style:italic;font-size:1.4rem;">Joyce Neres</div>
+                <div class="prof-desc">
+                    <p>Sou Joyce, uma professora de Educação Física <b>APAIXONADA</b> pelo movimento humano e pela necessidade básica de <b>SOBREVIVÊNCIA</b>, seja na natação ou em qualquer ação de cuidados com a saúde.</p>
+                    <p>Formada em Licenciatura pela Universidade Estadual de Santa Cruz (UESC) e Bacharel em Educação Física pelo Centro Universitário Internacional (UNINTER), com 5 anos de experiência na área da natação infantil e hidroginástica com idosos, atuando pela CLIFIMED/Ipiaú e em atendimentos particulares.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wave-top">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path fill="#0d5c6b" d="M0,64L60,69.3C120,75,240,85,360,74.7C480,64,600,32,720,26.7C840,21,960,43,1080,53.3C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path>
+            </svg>
+        </div>
+
+        <p style="text-align:center;text-transform:uppercase;letter-spacing:1px;font-size:0.65rem;color:rgba(255,255,255,0.9);margin-bottom:0.2rem;font-style:italic;">Natação Particular · Profª Joyce Neres</p>
+        <p style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.75);margin-bottom:0.2rem;font-style:italic;">(73) 99104-0064</p>
+        <p style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.75);font-style:italic;">CREF/BA-022609</p>
+    </footer>
+
+</div>
+
+<button id="btnTop" onclick="scrollToTop()">↑</button>
+
+
+
+<script>
+    // Accordion Logic
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+            accordionItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            item.classList.toggle('active');
+        });
+    });
+
+    // Scroll Reveal Logic
+    function reveal() {
+        const reveals = document.querySelectorAll(".reveal");
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveals[i].getBoundingClientRect().top;
+            const elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Trigger on load
+
+    // Back to Top Logic
+    const btnTop = document.getElementById("btnTop");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            btnTop.classList.add("show");
+        } else {
+            btnTop.classList.remove("show");
+        }
+    });
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleRefs() {
+        const content = document.getElementById('refs-content');
+        const icon = document.getElementById('refs-icon');
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+            icon.textContent = '−';
+            icon.style.transform = 'rotate(0deg)';
+        } else {
+            content.style.display = 'none';
+            icon.textContent = '+';
+        }
+    }
+
+    // SCROLL REVEAL — todos os parágrafos p-reveal
+    const reveals = document.querySelectorAll('.p-reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
