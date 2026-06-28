@@ -31,6 +31,31 @@
         }
         #app { width: 100%; max-width: 480px; overflow-x: hidden; }
 
+
+
+        /* ANIMAÇÃO DE ENTRADA */
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.5s; }
+        .fade-in-delay-3 { animation-delay: 0.8s; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* BARRA DE PROGRESSO */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #1a7f8e, #0d5c6b);
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -182,7 +207,7 @@
         /* BASE TEÓRICA */
         .base-teorica {
             background: var(--bg);
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
         .base-teorica h2 {
             font-family: var(--font-head);
@@ -202,7 +227,7 @@
         /* SEÇÕES COM FOTO + TEXTO */
         .foto-texto-section {
             background: var(--bg);
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
         .foto-texto-section h2 {
             font-family: var(--font-head);
@@ -282,7 +307,7 @@
         /* FICHA */
         .ficha {
             background: var(--white);
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
         .ficha h2 {
             font-family: var(--font-head);
@@ -295,7 +320,7 @@
         /* CLASSIFICAÇÕES */
         .classificacoes {
             background: var(--bg);
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
         .classificacoes h2 {
             font-family: var(--font-head);
@@ -320,7 +345,7 @@
         /* OBSERVAÇÕES */
         .observacoes {
             background: var(--white);
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
         .observacoes h2 {
             color: var(--teal-dark);
@@ -390,6 +415,27 @@
             text-align: center;
         }
 
+
+        /* WHATSAPP FLUTUANTE */
+        #btn-whatsapp-float {
+            position: fixed;
+            bottom: 5rem;
+            right: 1.2rem;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(37,211,102,0.4);
+            text-decoration: none;
+        }
         /* BACK TO TOP */
         #btnTop {
             position: fixed;
@@ -436,20 +482,21 @@
     </style>
 </head>
 <body>
+<div id="progress-bar"></div>
 <div id="app">
 
     <!-- CAPA -->
     <section class="capa">
-        <div class="reveal" style="background:#0f2a30;border-radius:20px;padding:1.8rem 1.5rem;margin-bottom:1.5rem;">
+        <div class="fade-in fade-in-delay-1" style="background:#0f2a30;border-radius:20px;padding:1.8rem 1.5rem;margin-bottom:1.5rem;">
             <p style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1.5px;color:#1a7f8e;font-weight:600;margin-bottom:0.5rem;font-family:var(--font-head);">AVALIAÇÃO TÉCNICA QUALITATIVA</p>
             <h1 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;color:#f0ede6;text-transform:none;letter-spacing:0;margin-bottom:0.8rem;line-height:1.2;text-align:left;">Bem-vinda° !!</h1>
             <p style="font-family:var(--font-head);font-size:0.88rem;color:rgba(255,255,255,0.85);text-align:left;margin:0;line-height:1.6;font-weight:400;">Esse é o seu guia autoexplicativo da avaliação técnica qualitativa que irá receber.</p>
         </div>
-        <div class="capa-foto-wrap">
+        <div class="capa-foto-wrap fade-in fade-in-delay-2">
             <div class="capa-degradê"></div>
             <img src="https://i.imgur.com/mVIInGY.png" alt="Profª Joyce Neres">
         </div>
-        <div class="capa-box reveal">
+        <div class="capa-box fade-in fade-in-delay-3">
             <div class="capa-tag">
                 <span class="solido">OBJETIVO DESSA PÁGINA</span>
             </div>
@@ -543,10 +590,10 @@
     <section class="ficha reveal">
         <h2>Como é a ficha que você vai receber?</h2>
         <ul style="list-style:none;padding:0;margin-bottom:1.2rem;">
-            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">·</span> Avaliação dividida em blocos.</li>
-            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">·</span> Cada bloco representa uma área da psicomotricidade com suas habilidades específicas.</li>
-            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">·</span> Cada habilidade é classificada com as siglas, que indica o nível de execução da criança naquele momento.</li>
-            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">·</span> O significado das siglas estará ao lado de cada bloco.</li>
+            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">→</span> Avaliação dividida em blocos.</li>
+            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">→</span> Cada bloco representa uma área da psicomotricidade com suas habilidades específicas.</li>
+            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">→</span> Cada habilidade é classificada com as siglas, que indica o nível de execução da criança naquele momento.</li>
+            <li class="p-reveal" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.8rem;font-size:0.95rem;color:#0d5c6b;line-height:1.7;"><span style="color:#1a7f8e;font-size:1rem;flex-shrink:0;">→</span> O significado das siglas estará ao lado de cada bloco.</li>
         </ul>
         <p class="p-reveal" style="margin-top:1rem;">Veja abaixo um trecho real de como a ficha chega para você:</p>
         <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:#0d5c6b;font-weight:700;margin:1rem 0 0.5rem;">Exemplo real da ficha</p>
@@ -638,9 +685,18 @@
 
 </div>
 
+<a id="btn-whatsapp-float" href="https://wa.me/5573991040064" target="_blank" title="Fale comigo no WhatsApp">💬</a>
 <button id="btnTop" onclick="scrollToTop()">↑</button>
 
 <script>
+    // Barra de progresso
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        document.getElementById('progress-bar').style.width = progress + '%';
+    });
+
     // Accordion
     document.querySelectorAll('.accordion-item').forEach(item => {
         item.querySelector('.accordion-header').addEventListener('click', () => {
