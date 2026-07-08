@@ -140,6 +140,60 @@
             text-align: justify;
             padding: 0 0.5rem;
         }
+        .capa-hero {
+            background: #0D1117;
+            margin: -2.5rem -1.5rem 1.5rem;
+            padding: 3rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .capa-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: #ffffff;
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+        .capa-hero-label {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #4DB896;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(200,212,160,0.25);
+            border-radius: 20px;
+            padding: 4px 14px;
+            margin-bottom: 16px;
+            font-family: var(--font-head);
+        }
+        .capa-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.6rem, 6vw, 2rem);
+            color: #f0ede6;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-align: center;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .capa-hero h1 span { color: #4DB896; }
+        .capa-hero p {
+            font-family: var(--font-head);
+            font-size: 0.88rem;
+            color: rgba(224,224,224,0.9);
+            line-height: 1.6;
+            max-width: 420px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: 400;
+        }
 
         /* BOAS-VINDAS */
         .boas-vindas {
@@ -487,10 +541,10 @@
 
     <!-- CAPA -->
     <section class="capa">
-        <div class="fade-in fade-in-delay-1" style="background:#0f2a30;border-radius:20px;padding:1.8rem 1.5rem;margin-bottom:1.5rem;">
-            <p style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1.5px;color:#1a7f8e;font-weight:600;margin-bottom:0.5rem;font-family:var(--font-head);">AVALIAÇÃO TÉCNICA QUALITATIVA</p>
-            <h1 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;color:#f0ede6;text-transform:none;letter-spacing:0;margin-bottom:0.8rem;line-height:1.2;text-align:left;">Bem-vinda° !!</h1>
-            <p style="font-family:var(--font-head);font-size:0.88rem;color:rgba(255,255,255,0.85);text-align:left;margin:0;line-height:1.6;font-weight:400;">Esse é o seu guia autoexplicativo da avaliação técnica qualitativa que irá receber.</p>
+        <div class="capa-hero fade-in fade-in-delay-1">
+            <div class="capa-hero-label">Avaliação Técnica Qualitativa</div>
+            <h1><span>Bem-vinda</span><sup>°</sup> !!</h1>
+            <p>Esse é o seu guia autoexplicativo da avaliação técnica qualitativa que irá receber.</p>
         </div>
         <div class="capa-foto-wrap fade-in fade-in-delay-2">
             <div class="capa-degradê"></div>
