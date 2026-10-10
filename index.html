@@ -462,10 +462,25 @@
         }
         footer p {
             font-size: 0.65rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 0.15rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 0.35rem;
             font-style: italic;
             text-align: center;
+            line-height: 1.6;
+        }
+        footer .footer-line2 {
+            font-style: normal;
+            font-size: 0.62rem;
+        }
+        footer .footer-accent {
+            color: #1a7f8e;
+        }
+        footer a.footer-accent {
+            color: #1a7f8e;
+            text-decoration: none;
+        }
+        footer a.footer-accent:hover {
+            text-decoration: underline;
         }
 
 
@@ -733,8 +748,12 @@
     <!-- FOOTER -->
     <footer>
         <p style="text-transform:uppercase;letter-spacing:1px;">Natação Particular · Profª Joyce Neres</p>
-        <p>(73) 99104-0064</p>
-        <p>CREF/BA-022609</p>
+        <p class="footer-line2">
+            <a class="footer-accent" href="tel:+5573991040064">(73) 99104-0064</a>
+            · <a class="footer-accent" href="https://instagram.com/prof.joyceneres" target="_blank" rel="noopener noreferrer">@prof.joyceneres</a>
+            · <span>CREF/BA-022609</span>
+            · <span class="footer-accent">guia bônus dos pais</span>
+        </p>
     </footer>
 
 </div>
